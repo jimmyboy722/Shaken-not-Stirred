@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+//const dateFormat = require('../utils/dateFormat');
 
 const drinkSchema = new Schema({
   drinkName: {
@@ -10,13 +10,19 @@ const drinkSchema = new Schema({
   drinkDescription: {
     type: String,
     minlength: 1,
+    required: true,
     maxlength: 280,
+    trim: true,
+  },
+  drinkAuthor: {
+    type: String,
+    required: true,
     trim: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+    //get: (timestamp) => dateFormat(timestamp),
   },
 });
 
