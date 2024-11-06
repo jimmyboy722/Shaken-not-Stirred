@@ -40,11 +40,11 @@ In order to install this app, follow these simple instructions:
 - Node.js. This is the runtime environment I used in conjunction with my IDE to code this project. You can download the current version of node.js [here](https://nodejs.org/en)
 - ![node screenshot](https://github.com/user-attachments/assets/77cd0435-19f8-4444-8ed1-0f27b24bfc03)
 - Express.js a server-side web app framework used to build RESTful APIs with Node.js. Take a look at their [documentation](https://expressjs.com/).
-  ![ExpressJS logo](image-2.png)
+  ![ExpressJS logo](./client/src/assets/images/image-2.png)
 - MongoDB is the document database we used that stores both structured and unstructured data. Check out their website [here](https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core_retarget-brand_gic-null_amers-us-ca_ps-all_desktop_eng_lead&utm_term=mongodb&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=14291004479&adgroup=128837427347&cq_cmp=14291004479&gad_source=1&gclid=Cj0KCQiA_qG5BhDTARIsAA0UHSI3-zWap1GPOB7qphDOHT2tCLieZv1xygoP_WLEGmY7Qvx0x0Ofl7oaAozzEALw_wcB).
-  ![MongoDB logo](image.png)
+  ![MongoDB logo](./client/src/assets/images/image.png)
 - React is the free/open source javaScript library we used for the rendering of the front end of this project. Check out their [website](https://react.dev/).
-  ![ReactJs logo](image-1.png)
+  ![ReactJs logo](./client/src/assets/images/image-1.png)
 
 ---
 
