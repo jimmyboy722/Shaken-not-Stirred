@@ -1,8 +1,15 @@
+import Header from "./components/Header.jsx";
+import SignUpForm from "./components/SignupForm.jsx";
+import AddDrink from "./components/AddDrink.jsx";
+import LoginForm from "./components/LoginForm.jsx";
+
 function App() {
   return (
-    <div className="App">
-      <div></div>
-      <h1 className="text-red-600">Hello World</h1>
+    <div>
+      <Header/>
+      <SignUpForm/>
+      <LoginForm/>
+      <AddDrink/>
     </div>
   );
 }
