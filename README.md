@@ -75,5 +75,5 @@ Sometimes, you just need a drink. Help us help everyone unwind a little bit, cel
 
 - Email Efrain, Emily or James with any questions at the following email addresses:
   Efrain: efraindelcampo17@hotmail.com
-  Emily:
+  Emily: emilyramirez218@gmail.com
   James: jeckman722@gmail.com
