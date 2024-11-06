@@ -11,7 +11,7 @@ const typeDefs = `
     _id: ID
     drinkName: String
     drinkDescription: String
-    thoughtAuthor: String
+    drinkAuthor: String
     createdAt: String
   }
 
