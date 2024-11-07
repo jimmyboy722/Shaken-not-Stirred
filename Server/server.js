@@ -1,5 +1,6 @@
 // THIS FILE USED TO SET UP AN EXPRESS SERVER AND CONNECT IT TO THE GRAPHQL SERVER
 
+require("dotenv").config(); // IMPORTING DOTENV FOR THE ENVIRONMENT VARIABLES
 // IMPORTS AND DECLARATIONS
 const express = require("express");
 const path = require("path");
@@ -37,12 +38,12 @@ const runApolloServer = async () => {
   );
   // CHECKING IF NODE ENV IS PRODUCTION AND IF SO...
   //if (process.env.NODE_ENV === "production") {
-    //SERVE STATIC FILES FROM CLIENT/DIST DIRECTORY ALLOWING FOR REACT ROUTING
-   // app.use(express.static(path.join(__dirname, "../client/dist")));
-    // FOR ALL OTHER ROUTES SEND INDEX.HTML IN THE CLIENT/DIST DIRECTORY
-   // app.get("*", (req, res) => {
-   //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-   // });
+  //SERVE STATIC FILES FROM CLIENT/DIST DIRECTORY ALLOWING FOR REACT ROUTING
+  // app.use(express.static(path.join(__dirname, "../client/dist")));
+  // FOR ALL OTHER ROUTES SEND INDEX.HTML IN THE CLIENT/DIST DIRECTORY
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  // });
   //}
   // DB CONNECTION AND SERVER LISTENING
   db.once("open", () => {
