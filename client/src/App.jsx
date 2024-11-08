@@ -46,6 +46,7 @@ function App() {
       <SavedDrink/>
       <Outlet/>
     </ApolloProvider>
+
   );
 }
 

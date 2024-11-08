@@ -17,7 +17,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
   },
   drinks: [
     {
@@ -25,6 +24,12 @@ const userSchema = new Schema({
       ref: 'Drink',
     },
   ],
+  favorites: [
+    { 
+      type: Schema.Types.ObjectId,
+      ref: 'Drink',
+     }
+  ]
 });
 
 userSchema.pre('save', async function (next) {
