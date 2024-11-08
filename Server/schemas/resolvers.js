@@ -5,25 +5,25 @@ const resolvers = {
     Query: {
         //Returns a list of all users
         users: async () => {
-            return User.find().populate('drinks');
+            return User.find().populate('drinks').populate('favorites');
         },
         // Takes a username as an argument and returns a specific user based on that username
         user: async (parent, {username}) => {
-            return User.findOne({username}).populate('drinks');
+            return User.findOne({username}).populate('drinks').populate('favorites');
         },
         //Returns a list of drinks optionally filtered by username
         drinks: async (parent, { username }) => {
             const params = username ? { username } : {};
             return Drink.find(params).sort({ createdAt: -1 });
           },
-        //Takes a drinkId as an argument and returns a specific thought.
+        //Takes a drinkId as an argument and returns a specific drink.
         drink: async (parent, { drinkId }) => {
             return Drink.findOne({ _id: drinkId });
           },
         //Returns the currently authenticated user based on the context (used for profile)
         me: async (parent, args, context) => {
             if (context.user) {
-              return User.findOne({ _id: context.user._id }).populate('drinks');
+              return User.findOne({ _id: context.user._id }).populate('drinks').populate('favorites');
             }
             throw AuthenticationError;
           },
@@ -54,11 +54,13 @@ const resolvers = {
           return { token, user };
         },
         //Allows an authenticated user to add a new drink andd returns the newly created Drink object
-        addDrink: async (parent, { drinkName, drinkDescription }, context) => {
+        addDrink: async (parent, { drinkName, drinkDescription, ingredients, photo }, context) => {
           if (context.user) {
             const drink = await Drink.create({
               drinkName,
               drinkDescription,
+              ingredients, 
+              photo,
               drinkAuthor: context.user.username,
             });
     
@@ -69,8 +71,7 @@ const resolvers = {
     
             return drink;
           }
-          throw AuthenticationError;
-          ('You need to be logged in!');
+          throw AuthenticationError('You need to be logged in!');
         },
         //Deletes a drink identified by drinkId and returns the deleted Drink object
         removeDrink: async (parent, { drinkId }, context) => {
@@ -87,8 +88,56 @@ const resolvers = {
     
             return drink;
           }
-          throw AuthenticationError;
+          throw new AuthenticationError('You need to be logged in!');
         },
+        
+    // Add drink to favorites
+    addToFavorites: async (parent, { drinkId }, context) => {
+        if (context.user) {
+          // Find the user by their ID
+          const user = await User.findById(context.user._id);
+  
+          // Check if the drink already exists in the favorites
+          if (user.favorites.includes(drinkId)) {
+            throw new Error('This drink is already in your favorites!');
+          }
+  
+          // Find the drink by ID
+          const drink = await Drink.findById(drinkId);
+          if (!drink) {
+            throw new Error('Drink not found!');
+          }
+  
+          // Add the drink to the user's favorites
+          user.favorites.push(drinkId);
+          await user.save();
+  
+          return user;  // Return the updated user
+        }
+  
+        throw new AuthenticationError('You need to be logged in!');
+      },
+  
+      // Remove drink from favorites
+      removeFromFavorites: async (parent, { drinkId }, context) => {
+        if (context.user) {
+          // Find the user by their ID
+          const user = await User.findById(context.user._id);
+  
+          // Check if the drink exists in the user's favorites
+          if (!user.favorites.includes(drinkId)) {
+            throw new Error('This drink is not in your favorites!');
+          }
+  
+          // Remove the drink from the favorites array
+          user.favorites.pull(drinkId);
+          await user.save();
+  
+          return user;  // Return the updated user
+        }
+  
+        throw new AuthenticationError('You need to be logged in!');
+      },
       },
     };
     
