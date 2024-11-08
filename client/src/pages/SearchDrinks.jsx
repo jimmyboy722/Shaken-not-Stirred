@@ -3,20 +3,20 @@
 // IMPORTS
 import { useState, useEffect } from 'react';// USED FOR MANAGING COMPONENT STATE AND EFFECTS
 
-import {// BOOTSTRAP COMPONENTS FOR STYLING
-  Container,
-  Form,
-  Button,
-  Row,
-  Col,
-} from 'react-bootstrap';
+// import {// BOOTSTRAP COMPONENTS FOR STYLING
+//   Container,
+//   Form,
+//   Button,
+//   Row,
+//   Col,
+// } from 'react-bootstrap';
 
 
 import { useMutation } from '@apollo/client';// HANDLES SAVING DRINKS TO THE USER'S ACCOUNT
 import { SAVE_DRINK } from '../utils/mutations';
 import { saveDrinkIds, getSavedDrinkIds } from '../utils/localStorage'; // FOR PERSISTING SAVED DRINK ID'S LOCALLY
 
-import Auth from '../utils/auth'; // HANDLES AUTHENTICATION(CHECKING LOGIN AND TOKEN MANAGEMENT)
+// import Auth from '../utils/auth'; // HANDLES AUTHENTICATION(CHECKING LOGIN AND TOKEN MANAGEMENT)
 
 // COMPONENT STATE INITIALIZATION
 const SearchDrinks = () => {
