@@ -1,0 +1,230 @@
+[
+  {
+    "drinkName": "Hotel Nacional",
+    "drinkDescription": "Named for its place of origin, the Hotel Nacional is a delightful and historical twist on the classic and features a few unusual ingredients.",
+    "ingredients": [
+      {
+        "name": "white or aged rum",
+        "quantity": "1.5",
+        "unit": "ozs"
+      },
+      {
+        "name": "apricot liqueur",
+        "quantity": "1/4",
+        "unit": "oz"
+      },
+      {
+        "name": "pineapple juice",
+        "quantity": "1",
+        "unit": "oz"
+      },
+      {
+        "name": "lime juice",
+        "quantity": "1/2",
+        "unit": "oz"
+      },
+      {
+        "name": "simple syrup",
+        "quantity": "1/2",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Donald Flunk"
+  },
+  {
+    "drinkName": "El Presidente",
+    "drinkDescription": "Don't overlook the El Presidente, a classic in its own right that is made with white rum, orange curaçao, French dry vermouth and grenadine.",
+    "ingredients": [
+      {
+        "name": "white rum",
+        "quantity": "1.5",
+        "unit": "ozs"
+      },
+      {
+        "name": "dry vermouth",
+        "quantity": "3/4",
+        "unit": "oz"
+      },
+      {
+        "name": "orange curacao",
+        "quantity": "1/4",
+        "unit": "oz"
+      },
+      {
+        "name": "grenadine",
+        "quantity": "2",
+        "unit": "dashes"
+      }
+    ],
+    "drinkAuthor": "Donald Flunk"
+  },
+  {
+    "drinkName": "Cuba Libre",
+    "drinkDescription": "Created to celebrate Cuban independence following the Spanish-American War, the Cuba Libre simply combines rum, lime and Coca-Cola.",
+    "ingredients": [
+      {
+        "name": "rum",
+        "quantity": "2",
+        "unit": "ozs"
+      },
+      {
+        "name": "lime juice",
+        "quantity": "1/4",
+        "unit": "oz"
+      },
+      {
+        "name": "Coca-Cola",
+        "quantity": "1",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Donald Flunk"
+  },
+  {
+    "drinkName": "Daiquiri",
+    "drinkDescription": "Perhaps the most traveled of Cuban classics, the Daiquiri is a beloved three-ingredient cocktail made with rum, lime and sugar.",
+    "ingredients": [
+      {
+        "name": "light rum",
+        "quantity": "2",
+        "unit": "ozs"
+      },
+      {
+        "name": "lime juice",
+        "quantity": "1",
+        "unit": "oz"
+      },
+      {
+        "name": "demerara sugar syrup",
+        "quantity": "3/4",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Kent Bent"
+  },
+  {
+    "drinkName": "Michelada",
+    "drinkDescription": "If you've never had a Michelada, you're in for a treat. The addition of hot sauce and lime juice add a spicy/sour kick that takes your average light Mexican beer from good to great.",
+    "ingredients": [
+      {
+        "name": "lime juice",
+        "quantity": "1/2",
+        "unit": "oz"
+      },
+      {
+        "name": "Mexican lager beer",
+        "quantity": "1",
+        "unit": "bottle"
+      },
+      {
+        "name": "Tobasco sauce",
+        "quantity": "2",
+        "unit": "dashes"
+      }
+    ],
+    "drinkAuthor": "Kent Bent"
+  },
+  {
+    "drinkName": "Margarita",
+    "drinkDescription": "Though the margarita has become a staple of American bars, the margarita's pink-hued cousin, the Paloma, is heralded by many in Mexico as the better cocktail. It's beloved not just for its bittersweet, citrusy grapefruit flavor, but also for its simplicity.",
+    "ingredients": [
+      {
+        "name": "blanco tequila",
+        "quantity": "2",
+        "unit": "ozs"
+      },
+      {
+        "name": "orange liqueur",
+        "quantity": "1/2",
+        "unit": "oz"
+      },
+      {
+        "name": "lime juice",
+        "quantity": "1",
+        "unit": "oz"
+      },
+      {
+        "name": "agave syrup",
+        "quantity": "1/2",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Kent Bent"
+  },
+  {
+    "drinkName": "Marianito",
+    "drinkDescription": "In northern Spain, Basque pintxos are served alongside a low-proof, Negroni-like drink called the Marianito. Essentially improved vermouth—sweet vermouth, Campari, bitters and a splash of gin—the summer-ready drink has spawned riffs, like the pomelo-spiked version from Bilbao cocktail bar La Mula de Moscú.",
+    "ingredients": [
+      {
+        "name": "sweet vermouth",
+        "quantity": "2.5",
+        "unit": "ozs"
+      },
+      {
+        "name": "Campari",
+        "quantity": "2/3",
+        "unit": "oz"
+      },
+      {
+        "name": "pomelo juice",
+        "quantity": "2/3",
+        "unit": "oz"
+      },
+      {
+        "name": "London dry gin",
+        "quantity": "1/2",
+        "unit": "oz"
+      },
+      {
+        "name": "angostura bitters",
+        "quantity": "2",
+        "unit": "dashes"
+      }
+    ],
+    "drinkAuthor": "Amy Stake"
+  },
+  {
+    "drinkName": "Pomada",
+    "drinkDescription": "On Menorca, the Spanish Mediterranean island, summer fiestas are synonymous with pomada, a slushy, icy blend of gin and lemonade served at the start of the season by officials at the local town hall.",
+    "ingredients": [
+      {
+        "name": "mint",
+        "quantity": "5",
+        "unit": "leaves"
+      },
+      {
+        "name": "basil",
+        "quantity": "5",
+        "unit": "leaves"
+      },
+      {
+        "name": "basil syrup",
+        "quantity": "1",
+        "unit": "oz"
+      },
+      {
+        "name": "Mohan gin",
+        "quantity": "1.75",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Amy Stake"
+  },
+  {
+    "drinkName": "Barraquito",
+    "drinkDescription": "Both a midmorning pick-me-up and a ritual, the drink—which comes from the Canary Islands and calls for sweetened condensed milk, Licor 43, whole milk and coffee—is the rare kind of cocktail that's beloved by adults of all ages.",
+    "ingredients": [
+      {
+        "name": "lemon juice",
+        "quantity": "1",
+        "unit": "oz"
+      },
+      {
+        "name": "soda water",
+        "quantity": "2.5",
+        "unit": "oz"
+      }
+    ],
+    "drinkAuthor": "Amy Stake"
+  }
+]
