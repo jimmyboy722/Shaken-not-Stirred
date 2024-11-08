@@ -5,14 +5,23 @@ const typeDefs = `
     email: String
     password: String
     drinks: [Drink]!
+    favorites: [Drink!]!
   }
 
   type Drink {
     _id: ID
     drinkName: String
     drinkDescription: String
+    ingredients: [Ingredient!]!
+    photo: String
     drinkAuthor: String
     createdAt: String
+  }
+
+  type Ingredient {
+    name: String!
+    quantity: String!
+    unit: String!
   }
 
   type Auth {
@@ -31,8 +40,15 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addDrink(drinkName: String!, drinkDescription: String!): Drink
+    addDrink(drinkName: String!, drinkDescription: String!, ingredients: [IngredientInput!]!, photo: String ): Drink
     removeDrink(drinkId: ID!): Drink
+    addToFavorites(drinkId: ID!): User
+    removeFromFavorites(drinkId: ID!): User
+  }
+  input IngredientInput {
+    name: String!
+    quantity: String!
+    unit: String!
   }
 `;
 
