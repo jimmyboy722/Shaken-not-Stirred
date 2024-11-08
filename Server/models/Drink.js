@@ -14,6 +14,14 @@ const drinkSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  ingredients: [
+    {
+      name: { type: String, required: true },
+      quantity: { type: Number, required: true },
+      unit: { type: String, required: true },
+    }
+  ],
+  photo: { type: String },
   drinkAuthor: {
     type: String,
     required: true,
