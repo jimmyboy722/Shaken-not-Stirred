@@ -68,7 +68,6 @@ const resolvers = {
         const drink = await Drink.create({
           drinkName,
           drinkDescription,
-
           ingredients,
           photo,
           drinkAuthor: context.user.username,
@@ -81,7 +80,7 @@ const resolvers = {
 
         return drink;
       }
-      throw AuthenticationError("You need to be logged in!");
+      throw AuthenticationError;
     },
     //Deletes a drink identified by drinkId and returns the deleted Drink object
     removeDrink: async (parent, { drinkId }, context) => {
@@ -99,7 +98,7 @@ const resolvers = {
         return drink;
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError;
     },
 
     // Add drink to favorites
@@ -126,7 +125,7 @@ const resolvers = {
         return user; // Return the updated user
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError;
     },
 
     // Remove drink from favorites
@@ -147,7 +146,7 @@ const resolvers = {
         return user; // Return the updated user
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError;
     },
   },
 };
