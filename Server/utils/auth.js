@@ -1,8 +1,7 @@
 //  IMPORTS AND DECLARATIONS
 const { GraphQLError } = require("graphql"); // TO CREATE A CUSTOM ERROR FOR UNAUTHENTICATED USERS
 const jwt = require("jsonwebtoken");
-const secret = "shhhdonttell"; // KEY TO ENCODE AND DECODE THE TOKEN
-const exp = 300000; // SETS THE EXPIRATION TIME OF THE TOKEN IN MILLISECONDS
+const exp = 3600000; // SETS THE EXPIRATION TIME OF THE TOKEN IN MILLISECONDS
 
 module.exports = {
   // ERROR HANDLING FOR AUTHENTICATION
@@ -37,6 +36,8 @@ module.exports = {
   signToken: function ({ username, email, _id }) {
     const pLoad = { username, email, _id };
     // RETURN GENERATED JWT TOKEN WHEN USER LOGS IN OR REGISTERS
-    return jwt.sign({ data: pLoad }, secret, { expiresIn: exp });
+    return jwt.sign({ data: pLoad }, process.env.AUTH_SECRET, {
+      expiresIn: exp,
+    });
   },
 };
