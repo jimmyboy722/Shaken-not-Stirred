@@ -8,8 +8,8 @@ function App() {
     <div>
       <Header/>
       <SignUpForm/>
-      <LoginForm/>
-      <AddDrink/>
+      {/* <LoginForm/> */}
+      {/* <AddDrink/> */}
     </div>
   );
 }
