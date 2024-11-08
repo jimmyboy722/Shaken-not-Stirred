@@ -1,12 +1,3 @@
-import Header from "./components/Header.jsx";
-import SignUpForm from "./components/SignupForm.jsx";
-import AddDrink from "./components/AddDrink.jsx";
-import LoginForm from "./components/LoginForm.jsx";
-import SearchDrink from "./components/SearchDrinks.jsx";
-import SavedDrink from "./components/SavedDrinks.jsx";
-
-import {Outlet} from "react-router-dom";
-import '../src/app.css';
 import {
   ApolloClient,
   InMemoryCache,
@@ -14,6 +5,8 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { Outlet } from "react-router-dom";
+import HomePage from "./pages/HomePage.jsx";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -34,19 +27,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header/>
-      <SignUpForm/>
-      <LoginForm/>
-      <AddDrink/>
-      <SearchDrink/>
-      <SavedDrink/>
-      <Outlet/>
+      <HomePage />
+      <Outlet />
     </ApolloProvider>
-
   );
 }
 
