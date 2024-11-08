@@ -20,7 +20,7 @@ const typeDefs = `
 
   type Ingredient {
     name: String!
-    quantity: Float!
+    quantity: String!
     unit: String!
   }
 
@@ -47,7 +47,7 @@ const typeDefs = `
   }
   input IngredientInput {
     name: String!
-    quantity: Float!
+    quantity: String!
     unit: String!
   }
 `;
