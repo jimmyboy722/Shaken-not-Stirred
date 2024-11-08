@@ -5,7 +5,9 @@ import Auth from "../utils/auth"; // HANDLES AUTHENTICATION AND TOKEN MANIPULATI
 import { // REACT BOOTSTRAP COMPONENTS
     Container,
     Card,
-    Button 
+    Button,
+    Row,
+    Col
 } from "react-bootstrap";
 
 import { useQuery , useMutation } from "@apollo/client"; // IMPORTS FOR QUERIES AND MUTATIONS FOR FETCHING AND UPDATING DATA VIA GRAPHQL
@@ -42,13 +44,13 @@ const SavedDrinks = () => {
     // RENDERED COMPONENT
     return (
         <>
-        <div fluid className="">
+        <div fluid className="text-light bg-dark p-5">
             <Container> {/* DISPLAYS PAGE TITLE */}
                 <h1>{userData.username}'s Saved Drinks</h1>
             </Container>
         </div>
         <Container>{/* USING TERNARY OPERATOR TO CHECK IF USER HAS SAVED DRINKS */}
-            <h2 className="">{userData.savedDrinks?.length
+            <h2 className="pt-5">{userData.savedDrinks?.length
                 ? `${userData.savedDrinks.length}'s Saved ${userData.savedDrinks.length === 1 ? 'Drink' : 'Drinks'}:`
                 : 'No Saved Drinks'}
             </h2>
