@@ -41,7 +41,7 @@ const SignUp = () => {
   return (
     <main>
       <div className="card-body text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center">
-        SignUp
+        Signup
         {data ? (
           <p>
             Success! You may now head <Link to="/">back to the homepage.</Link>
@@ -50,7 +50,7 @@ const SignUp = () => {
           <form onSubmit={handleFormSubmit}>
             <input
               className="m-2 p-2 b-2 rounded-xl text-black"
-              placeholder="Your username"
+              placeholder="username"
               name="username"
               type="text"
               value={formState.username}
@@ -58,7 +58,7 @@ const SignUp = () => {
             />
             <input
               className="m-2 p-2 b-2 rounded-xl text-black"
-              placeholder="Your email"
+              placeholder="email"
               name="email"
               type="email"
               value={formState.email}
