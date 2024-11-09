@@ -1,101 +1,92 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
 
-function LoginForm() {
-  // Create state variables for the fields in the form
-  // We are also setting their initial values to an empty string
-  const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+// import Auth from "../utils/auth";
 
-  const handleInputChange = (e) => {
-    // Getting the value and name of the input which triggered the change
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
+const Login = () => {
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error, data }] = useMutation(LOGIN);
 
-    // Based on the input type, we set the state of either email, username, and password
-    if (inputType === "email") {
-      setEmail(inputValue);
-    } else if (inputType === "userName") {
-      setUserName(inputValue);
-    } else {
-      setPassword(inputValue);
-    }
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    e.preventDefault();
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
 
-    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-    if (!validateEmail(email) || !userName) {
-      setErrorMessage("Email or username is invalid");
-      // We want to exit out of this code block if something is wrong so that the user can correct it
-      return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
-    if (!checkPassword(password)) {
-      setErrorMessage(
-        `Choose a more secure password for the account: ${userName}`
-      );
-      return;
-    }
-    alert(`Hello ${userName}`);
 
-    // If everything goes according to plan, we want to clear out the input after a successful registration.
-    setUserName("");
-    setPassword("");
-    setEmail("");
+    // clear form values
+    setFormState({
+      email: "",
+      password: "",
+    });
   };
 
   return (
-    <div>
-    <div>
-      <form
-        className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col"
-        onSubmit={handleFormSubmit}
-      >
+    <main>
+      <div className="card-body text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center">
         Login
-        <input
-          value={userName}
-          name="userName"
-          onChange={handleInputChange}
-          type="text"
-          placeholder="Username"
-          class="m-2 p-2 b-2 rounded-xl text-black"
-        />
-        <input
-          value={email}
-          name="email"
-          onChange={handleInputChange}
-          type="email"
-          placeholder="Email"
-          class="m-2 p-2 b-2 rounded-xl text-black"
-        />
-        <input
-          value={password}
-          name="password"
-          onChange={handleInputChange}
-          type="password"
-          placeholder="Password"
-          class="m-2 p-2 b-2 rounded-xl text-black"
-        />
-        <button
-          class="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2 "
-          type="submit"
-        >
-          Login
-        </button>
-      </form>
-      {errorMessage && (
-        <div>
-          <p className="error-text">{errorMessage}</p>
-        </div>
-      )}
-    </div>
-  </div>
-);
-}
+        {data ? (
+          <p>
+            Success! You may now head <Link to="/">back to the homepage.</Link>
+          </p>
+        ) : (
+          <form onSubmit={handleFormSubmit}>
+            <input
+              className="m-2 p-2 b-2 rounded-xl text-black"
+              placeholder="Your username"
+              name="username"
+              type="text"
+              value={formState.username}
+              onChange={handleChange}
+            />
+            <input
+              className="m-2 p-2 b-2 rounded-xl text-black"
+              placeholder="Your email"
+              name="email"
+              type="email"
+              value={formState.email}
+              onChange={handleChange}
+            />
+            <input
+              className="m-2 p-2 b-2 rounded-xl text-black"
+              placeholder="******"
+              name="password"
+              type="password"
+              value={formState.password}
+              onChange={handleChange}
+            />
+            <button
+              className="btn btn-block btn-primary"
+              style={{ cursor: "pointer" }}
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        )}
+        {error && <div>{error.message}</div>}
+      </div>
+    </main>
+  );
+};
 
-export default LoginForm;
+export default Login;
