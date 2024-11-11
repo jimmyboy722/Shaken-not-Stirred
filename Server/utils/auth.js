@@ -24,7 +24,9 @@ module.exports = {
     }
     // IF TOKEN IS FOUND, VERIFICATION ATTEMPTED WITH JWT.VERIFY METHOD AGAINST THE SECRET KEY AND EXPIRATION
     try {
-      const { data } = jwt.verify(tkn, process.env.AUTH_SECRET, { maxAge: exp });
+      const { data } = jwt.verify(tkn, process.env.AUTH_SECRET, {
+        maxAge: exp,
+      });
       req.user = data; // IF VERIFICATION IS SUCCESSFUL, REQ.USER IS POPULATED WITH TOKEN'S DATA PAYLOAD
     } catch {
       // ERROR HANDLING IF VERIFICAITON FAILS
