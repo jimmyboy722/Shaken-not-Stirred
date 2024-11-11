@@ -1,10 +1,11 @@
 // IMPORTING THE JWT DECODE LIBRARY
-import decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 // DEFINING THE AUTH SERVICE CLASS FOR HANDLING AUTHENTICATION
 class AuthService {
   getProfile() {
     // USES THE JWT DECODE LIBRARY TO DECODE THE TOKEN STORED IN LOCAL STORAGE
-    return decode(this.getToken()); // RETRIEVE THE PAYLOAD FROM THE TOKEN
+    return jwtDecode(this.getToken()); // RETRIEVE THE PAYLOAD FROM THE TOKEN
   }
   loggedIn() {
     // CHECKS IF A USER IS CURRENTLY LOGGED IN
@@ -15,7 +16,7 @@ class AuthService {
   isTokenExpired(token) {
     // METHOD TO CHECK IF THE TOKEN IS EXPIRED
     try {
-      const decoded = decode(token); // DECODES THE TOKEN TO ACCESS THE EXPIRATION FIELD
+      const decoded = jwtDecode(token); // DECODES THE TOKEN TO ACCESS THE EXPIRATION FIELD
       if (decoded.exp < Date.now() / 1000) {
         // COMPARING THE EXPIRATION DATE TO THE CURRENT DATE
         return true; // RETURNING TRUE IF THE TOKEN IS EXPIRED
@@ -24,6 +25,7 @@ class AuthService {
       return false;
     }
   }
+
   // RETRIEVING THE TOKEN FROM LOCAL STORAGE
   getToken() {
     return localStorage.getItem("id_token"); // RETURNING THE TOKEN IF IT EXISTS, OTHERWISE RETURNING NULL
@@ -40,4 +42,5 @@ class AuthService {
   }
 }
 // EXPORTING THE AUTH SERVICE CLASS
-export default new AuthService();
+const authService = new AuthService();
+export default authService;
