@@ -122,7 +122,7 @@ const resolvers = {
         user.favorites.push(drinkId);
         await user.save();
 
-        return user; // Return the updated user
+        return user.populate("favorites").execPopulate(); // Return the updated user
       }
 
       throw new AuthenticationError;
