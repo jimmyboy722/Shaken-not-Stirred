@@ -92,6 +92,7 @@ const AddDrink = () => {
             className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col"
             onSubmit={handleFormSubmit}
           >
+            <h3>Add Drink</h3>
             <div>
               <label>Drink Name:</label>
               <input
@@ -191,14 +192,18 @@ const AddDrink = () => {
       </div>
       
       {/* Display user's drinks */}
-      <div>
-      <h3 className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
-        Drinks</h3>
+      <div className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
+      <h3 >Drinks</h3>
       {drinks.length > 0 ? (
         drinks.map((drink) => (
+          <div class="mb-2 mt-2 max-w-big p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div key={drink._id} >
             <h4>{drink.drinkName}</h4>
-            {drink.photo ? <img src={drink.photo} alt={drink.drinkName} /> : <p>No image available</p>}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {drink.photo ? <img src={drink.photo} alt={drink.drinkName} 
+            style={{ width: '300px', height: '300px', objectFit: 'cover' }} /> 
+            : <p>No image available</p>}
+            </div>
             <p>{drink.drinkDescription}</p>
             <div className="ingredients">
               <h5>Ingredients:</h5>
@@ -213,9 +218,11 @@ const AddDrink = () => {
               )}
             </div>
             <p>created at: {drink.createdAt}</p>
-            <button onClick={() => handleRemoveDrink(drink._id)}>
+            <button onClick={() => handleRemoveDrink(drink._id)}
+            className="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2">
                 Remove Drink
               </button>
+              </div>
           </div>
         ))
       ) : (

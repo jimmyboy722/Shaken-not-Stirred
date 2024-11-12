@@ -50,8 +50,8 @@ export const SAVE_DRINK = gql`
 
 
 export const ADD_DRINK = gql`
-mutation AddDrink($drinkName: String!, $drinkDescription: String!, $ingredients: [IngredientInput!]!) {
-  addDrink(drinkName: $drinkName, drinkDescription: $drinkDescription, ingredients: $ingredients) {
+mutation AddDrink($drinkName: String!, $drinkDescription: String!, $ingredients: [IngredientInput!]!, $photo: String) {
+  addDrink(drinkName: $drinkName, drinkDescription: $drinkDescription, ingredients: $ingredients, photo: $photo) {
     drinkName
     drinkDescription
     ingredients {
