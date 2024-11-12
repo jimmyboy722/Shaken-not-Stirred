@@ -47,27 +47,6 @@ export const SAVE_DRINK = gql`
     }
   }
 `;
-// MUTATION TO REMOVE A DRINK FROM THE USER'S SAVED COLLECTION
-// TAKES IN A DRINKID AS INPUT TO IDENTIFY THE DRINK TO BE REMOVED
-// WHEN SUCCESSFUL, RETURNS THE UPDATED USER DATA ALONG WITH AN UPDATED SAVEDDRINKS ARRAY
-// ALLOWS THE FRONTEND TO UPDATE THE USER'S SAVED DRINKS IMMEDIATELY UPON REMOVAL
-export const REMOVE_DRINK = gql`
-  mutation removeDrink($drinkId: ID!) {
-    removeDrink(drinkId: $drinkId) {
-      _id
-      username
-      email
-      savedDrinks {
-        drinkId
-        authors
-        image
-        description
-        title
-        link
-      }
-    }
-  }
-`;
 
 
 export const ADD_DRINK = gql`
@@ -84,6 +63,15 @@ mutation AddDrink($drinkName: String!, $drinkDescription: String!, $ingredients:
     createdAt
     drinkAuthor
     photo
+  }
+}
+`;
+
+export const REMOVE_DRINK = gql`
+mutation RemoveDrink($drinkId: ID!) {
+  removeDrink(drinkId: $drinkId) {
+    _id
+    drinkName
   }
 }
 `;
