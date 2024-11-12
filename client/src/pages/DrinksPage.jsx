@@ -1,25 +1,28 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_DRINK } from '../utils/mutations';
 import { QUERY_DRINKS, QUERY_ME } from '../utils/queries';
-
 import Auth from '../utils/auth';
 
 const AddDrink = () => {
-  // Create state variables for the fields in the form
-  // We are also setting their initial values to an empty string
   const [drinkName, setDrinkName] = useState('');
   const [drinkDescription, setDrinkDescription] = useState('');
   const [ingredients, setIngredients] = useState([{ name: '', quantity: '', unit: '' }]);
-  const [photoUrl, setPhotoUrl] = useState(''); // New state for photo URL
+  const [photoUrl, setPhotoUrl] = useState('');
   const [addDrink, { error }] = useMutation(ADD_DRINK, {
     refetchQueries: [
       { query: QUERY_DRINKS },
       { query: QUERY_ME }
     ]
   });
+
+  // Use the useQuery hook to fetch the logged-in user's favorites
+  const { data } = useQuery(QUERY_ME);
+  console.log(data)
+
+  const favorites = data?.me?.drinks || [];
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -34,15 +37,14 @@ const AddDrink = () => {
           drinkName,
           drinkDescription,
           ingredients,
-          photo: photoUrl // Include photo URL in mutation variables
+          photo: photoUrl
         },
       });
 
-      // Reset form fields after successful submission
       setDrinkName('');
       setDrinkDescription('');
       setIngredients([{ name: '', quantity: '', unit: '' }]);
-      setPhotoUrl(''); // Reset photo URL field
+      setPhotoUrl('');
     } catch (err) {
       console.error(err);
     }
@@ -52,7 +54,7 @@ const AddDrink = () => {
     const { name, value } = event.target;
     if (name === 'drinkName') setDrinkName(value);
     if (name === 'drinkDescription') setDrinkDescription(value);
-    if (name === 'photoUrl') setPhotoUrl(value); // Update photo URL state
+    if (name === 'photoUrl') setPhotoUrl(value);
   };
 
   const handleIngredientChange = (index, event) => {
@@ -175,9 +177,36 @@ const AddDrink = () => {
           </p>
         )}
       </div>
-        <div class=" text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
-        Favorites
-        </div>
+      
+      {/* Display user's favorite drinks */}
+      <div>
+      <h3 className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
+        Favorite Drinks</h3>
+      {favorites.length > 0 ? (
+        favorites.map((drink) => (
+          <div key={drink._id} >
+            <h4>{drink.drinkName}</h4>
+            {drink.photo ? <img src={drink.photo} alt={drink.drinkName} /> : <p>No image available</p>}
+            <p>{drink.drinkDescription}</p>
+            <div className="ingredients">
+              <h5>Ingredients:</h5>
+              {drink.ingredients.length > 0 ? (
+                drink.ingredients.map((ingredient, idx) => (
+                  <p key={idx}>
+                    {ingredient.name}: {ingredient.quantity} {ingredient.unit}
+                  </p>
+                ))
+              ) : (
+                <p>No ingredients listed.</p>
+              )}
+            </div>
+            <p>created at: {drink.createdAt}</p>
+          </div>
+        ))
+      ) : (
+        <p>No favorite drinks added yet.</p>
+      )}
+    </div>
     </div>
   );
 };
