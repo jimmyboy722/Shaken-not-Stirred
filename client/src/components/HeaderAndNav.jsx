@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+// get logout button to work
+
+//make signup, login, buttons go away
 
 function HeaderAndNav() {
   return (
@@ -17,7 +21,7 @@ function HeaderAndNav() {
             <a href="/login">Login</a>
           </li>
           <li>
-            <a href="/logout">Logout</a>
+            <a href="#" onClick={() => Auth.logout()}>Logout</a>
           </li>
         </ul>
       </nav>

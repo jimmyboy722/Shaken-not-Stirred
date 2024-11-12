@@ -33,7 +33,7 @@ class AuthService {
   // SETTING THE TOKEN IN LOCAL STORAGE WITH THE ID TOKEN KEY
   login(idToken) {
     localStorage.setItem("id_token", idToken); // STORING THE JWT TOKEN UPON LOGIN
-    window.location.assign("/"); // REDIRECTING THE USER TO THE HOME PAGE
+    window.location.assign("/drinks"); // REDIRECTING THE USER TO THE HOME PAGE
   }
   // REMOVING THE TOKEN FROM LOCAL STORAGE, LOGGING THE USER OUT, AND REDIRECTING THEM TO THE LOGIN PAGE
   logout() {
