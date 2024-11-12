@@ -2,19 +2,19 @@ const createDateSuffix = (date) => {
   let todaysDate = date.toString();
 
   // SETTING THE CORRESPONDING SUFFIX
-  let endChar = date.charAt(date.length - 1);
+  let endChar = todaysDate.charAt(todaysDate.length - 1);
 
-  if (endChar === "1" && date !== "11") {
+  if (endChar === "1" && todaysDate !== "11") {
     // TO RULE OUT THE 11TH OF THE MONTH
-    date = `${date}st`;
+    date = `${todaysDate}st`;
   } else if (endChar === "2" && date !== "12") {
     // TO RULE OUT THE 12TH OF THE MONTH
-    date = `${date}nd`;
+    date = `${todaysDate}nd`;
   } else if (endChar === "3" && date !== "13") {
     // TO RULE OUT THE 13TH OF THE MONTH
-    date = `${date}rd`;
+    date = `${todaysDate}rd`;
   } else {
-    date = `${date}th`; // BECAUSE ALL OTHERS WILL END IN 'TH'
+    date = `${todaysDate}th`; // BECAUSE ALL OTHERS WILL END IN 'TH'
   }
   return todaysDate;
 };
