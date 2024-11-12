@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_DRINK } from '../utils/mutations';
+import { ADD_DRINK, REMOVE_DRINK } from '../utils/mutations';
 import { QUERY_DRINKS, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
@@ -17,11 +17,14 @@ const AddDrink = () => {
     ]
   });
 
-  // Use the useQuery hook to fetch the logged-in user's favorites
+  const [removeDrink] = useMutation(REMOVE_DRINK, {
+    refetchQueries: [{ query: QUERY_ME }],
+  });
+
   const { data } = useQuery(QUERY_ME);
   console.log(data)
 
-  const favorites = data?.me?.drinks || [];
+  const drinks = data?.me?.drinks || [];
 
 
   const handleFormSubmit = async (event) => {
@@ -72,6 +75,15 @@ const AddDrink = () => {
     setIngredients(ingredients.filter((_, i) => i !== index));
   };
 
+  const handleRemoveDrink = async (drinkId) => {
+    try {
+      await removeDrink({
+        variables: { drinkId },
+      });
+    } catch (err) {
+      console.error("Failed to remove drink:", err);
+    }
+  };
   return (
     <div className="grid grid-cols-2">
       <div>
@@ -178,12 +190,12 @@ const AddDrink = () => {
         )}
       </div>
       
-      {/* Display user's favorite drinks */}
+      {/* Display user's drinks */}
       <div>
       <h3 className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
-        Favorite Drinks</h3>
-      {favorites.length > 0 ? (
-        favorites.map((drink) => (
+        Drinks</h3>
+      {drinks.length > 0 ? (
+        drinks.map((drink) => (
           <div key={drink._id} >
             <h4>{drink.drinkName}</h4>
             {drink.photo ? <img src={drink.photo} alt={drink.drinkName} /> : <p>No image available</p>}
@@ -201,6 +213,9 @@ const AddDrink = () => {
               )}
             </div>
             <p>created at: {drink.createdAt}</p>
+            <button onClick={() => handleRemoveDrink(drink._id)}>
+                Remove Drink
+              </button>
           </div>
         ))
       ) : (
