@@ -1,97 +1,185 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
-function AddDrink() {
+import { ADD_DRINK } from '../utils/mutations';
+import { QUERY_DRINKS, QUERY_ME } from '../utils/queries';
+
+import Auth from '../utils/auth';
+
+const AddDrink = () => {
   // Create state variables for the fields in the form
   // We are also setting their initial values to an empty string
-  const [DrinkName, setDrinkName] = useState("");
-  const [DrinkDescription, setDrinkDescription] = useState("");
-  const [Author, setAuthor] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [drinkName, setDrinkName] = useState('');
+  const [drinkDescription, setDrinkDescription] = useState('');
+  const [ingredients, setIngredients] = useState([{ name: '', quantity: '', unit: '' }]);
+  const [photoUrl, setPhotoUrl] = useState(''); // New state for photo URL
+  const [addDrink, { error }] = useMutation(ADD_DRINK, {
+    refetchQueries: [
+      { query: QUERY_DRINKS },
+      { query: QUERY_ME }
+    ]
+  });
 
-  const handleInputChange = (e) => {
-    // Getting the name and value of the input which triggered the change
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-    // Based on the input type, we set the state of either DrinkName, Drink Desciprtion and Author
-    if (inputType === "DrinkName") {
-      setDrinkName(inputValue);
-    } else if (inputType === "DrinkDescription") {
-      setDrinkDescription(inputValue);
-    } else {
-      setAuthor(inputValue);
+    if (!Auth.loggedIn()) {
+      return;
+    }
+
+    try {
+      const { data } = await addDrink({
+        variables: {
+          drinkName,
+          drinkDescription,
+          ingredients,
+          photo: photoUrl // Include photo URL in mutation variables
+        },
+      });
+
+      // Reset form fields after successful submission
+      setDrinkName('');
+      setDrinkDescription('');
+      setIngredients([{ name: '', quantity: '', unit: '' }]);
+      setPhotoUrl(''); // Reset photo URL field
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    e.preventDefault();
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'drinkName') setDrinkName(value);
+    if (name === 'drinkDescription') setDrinkDescription(value);
+    if (name === 'photoUrl') setPhotoUrl(value); // Update photo URL state
+  };
 
-    // First we check to see if the DrinkName, DrinkDescription or Author is empty. If so we set an error message to be displayed on the page.
-    if (!DrinkName || !DrinkDescription || !Author) {
-      setErrorMessage("Please fill out fields!");
-      // We want to exit out of this code block if something is wrong so that the user can correct it
-      return;
-    }
-    // If everything goes according to plan, we want to clear out the input after successfully adding a drink
-    setDrinkName("");
-    setDrinkDescription("");
-    setAuthor("");
+  const handleIngredientChange = (index, event) => {
+    const { name, value } = event.target;
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index][name] = value;
+    setIngredients(updatedIngredients);
+  };
+
+  const addIngredientField = () => {
+    setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
+  };
+
+  const removeIngredient = (index) => {
+    setIngredients(ingredients.filter((_, i) => i !== index));
   };
 
   return (
-    <>
-      <div className="grid grid-cols-2">
-        <div>
-          <form
+    <div className="grid grid-cols-2">
+      <div>
+        {Auth.loggedIn() ? (
+          <form 
             className="form text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col"
             onSubmit={handleFormSubmit}
           >
-            Add a drink
-            <input
-              value={DrinkName}
-              name="DrinkName"
-              onChange={handleInputChange}
-              type="text"
-              placeholder="Drink Name"
-              class="m-2 p-2 b-2 rounded-xl text-black"
-            />
-            <input
-              value={DrinkDescription}
-              name="DrinkDescription"
-              onChange={handleInputChange}
-              type="text"
-              placeholder="Drink Description"
-              class="m-2 p-2 b-2 rounded-xl text-black"
-            />
-            <input
-              value={Author}
-              name="Author"
-              onChange={handleInputChange}
-              type="text"
-              placeholder="Author"
-              class="m-2 p-2 b-2 rounded-xl text-black"
-            />
-            <button
-              class="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2 "
-              type="submit"
-            >
-              Add drink
-            </button>
-          </form>
-          {errorMessage && (
             <div>
-              <p className="error-text">{errorMessage}</p>
+              <label>Drink Name:</label>
+              <input
+                type="text"
+                name="drinkName"
+                value={drinkName}
+                onChange={handleInputChange}
+                placeholder="Drink Name"
+                className="m-2 p-2 b-2 rounded-xl text-black"
+                required
+              />
             </div>
-          )}
-        </div>
-        <div class=" text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
-          Favorites
-        </div>
+            <div>
+              <label>Drink Description:</label>
+              <textarea
+                name="drinkDescription"
+                value={drinkDescription}
+                onChange={handleInputChange}
+                placeholder="Drink Description"
+                className="m-2 p-2 b-2 rounded-xl text-black"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label>Photo URL:</label>
+              <input
+                type="text"
+                name="photoUrl"
+                value={photoUrl}
+                onChange={handleInputChange}
+                placeholder="Enter a URL for the drink photo"
+                className="m-2 p-2 b-2 rounded-xl text-black"
+              />
+            </div>
+            <div>
+              <label>Ingredients:</label>
+              {ingredients.map((ingredient, index) => (
+                <div key={index}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Ingredient Name"
+                    value={ingredient.name}
+                    onChange={(e) => handleIngredientChange(index, e)}
+                    className="m-2 p-2 b-2 rounded-xl text-black"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="quantity"
+                    placeholder="Quantity"
+                    value={ingredient.quantity}
+                    onChange={(e) => handleIngredientChange(index, e)}
+                    className="m-2 p-2 b-2 rounded-xl text-black"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="unit"
+                    placeholder="Unit"
+                    value={ingredient.unit}
+                    onChange={(e) => handleIngredientChange(index, e)}
+                    className="m-2 p-2 b-2 rounded-xl text-black"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeIngredient(index)}
+                    className="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addIngredientField}
+                className="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2"
+              >
+                Add Ingredient
+              </button>
+            </div>
+            <button
+              type="submit"
+              className="border-2 rounded-xl text-center w-24 flex justify-center m-2 p-2 b-2"
+            >
+              Add Drink
+            </button>
+            {error && <div className="error-text">{error.message}</div>}
+          </form>
+        ) : (
+          <p>
+            You need to be logged in to add a drink. Please{' '}
+            <Link to="/login">login</Link> or <Link to="/signup">signup</Link>.
+          </p>
+        )}
       </div>
-    </>
+        <div class=" text-white bg-purple-600 m-4 p-4 border-2 rounded-xl text-bold text-center flex flex-col">
+        Favorites
+        </div>
+    </div>
   );
-}
+};
 
 export default AddDrink;
