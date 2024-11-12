@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql} from "@apollo/client";
 // LOGIN MUTATION TO LOGIN A USER BY TAKING THEIR EMAIL AND PASSWORD AS INPUT
 // AND RETURNING AN AUTH OBJECT CONTAINING A TOKEN AND USER DATA
 // TOKEN CAN BE STORED ON THE CLIENT SIDE TO MAINTAIN THE USER'S SESSION
@@ -70,18 +70,20 @@ export const REMOVE_DRINK = gql`
 `;
 
 
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      email
-      thoughts {
-        _id
-        thoughtText
-        thoughtAuthor
-        createdAt
-      }
+export const ADD_DRINK = gql`
+mutation AddDrink($drinkName: String!, $drinkDescription: String!, $ingredients: [IngredientInput!]!) {
+  addDrink(drinkName: $drinkName, drinkDescription: $drinkDescription, ingredients: $ingredients) {
+    drinkName
+    drinkDescription
+    ingredients {
+      name
+      quantity
+      unit
     }
+    _id
+    createdAt
+    drinkAuthor
+    photo
   }
+}
 `;
