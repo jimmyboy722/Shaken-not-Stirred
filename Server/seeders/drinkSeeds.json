@@ -182,7 +182,8 @@
         "unit": "dashes"
       }
     ],
-    "drinkAuthor": "Amy Stake"
+    "drinkAuthor": "Amy Stake",
+    "photo": "https://punchdrink.com/wp-content/uploads/2024/07/Article2-Marianito-Vermouth-Cocktail-Recipe-Eel-Bar-NYC.jpg?w=800"
   },
   {
     "drinkName": "Pomada",
@@ -209,7 +210,8 @@
         "unit": "oz"
       }
     ],
-    "drinkAuthor": "Amy Stake"
+    "drinkAuthor": "Amy Stake",
+    "photo": "https://punchdrink.com/wp-content/uploads/2022/07/Article2-Pomada-Menorca-Party-Drink.jpg?w=800"
   },
   {
     "drinkName": "Barraquito",
@@ -226,6 +228,7 @@
         "unit": "oz"
       }
     ],
-    "drinkAuthor": "Amy Stake"
+    "drinkAuthor": "Amy Stake", 
+    "photo": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBwiyi0AXauL45q0U85P19tBGX_eDlxZqfGf8CCppRV_GsmmbWZ2knlW9XOj9fnX6rl1EfiAeyOu36Y8glPGk1-kXx59gXwaA2E_4b2Bft-hCGx3vIf9RXZqH4Tz9As41m538mTHVmFzxP/s1600/1.jpg"
   }
 ]
