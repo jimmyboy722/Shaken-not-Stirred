@@ -1,11 +1,11 @@
 // IMPORTING THE JWT DECODE LIBRARY
-import { jwtDecode } from "jwt-decode";
+import decode from "jwt-decode";
 
 // DEFINING THE AUTH SERVICE CLASS FOR HANDLING AUTHENTICATION
 class AuthService {
   getProfile() {
     // USES THE JWT DECODE LIBRARY TO DECODE THE TOKEN STORED IN LOCAL STORAGE
-    return jwtDecode(this.getToken()); // RETRIEVE THE PAYLOAD FROM THE TOKEN
+    return decode(this.getToken()); // RETRIEVE THE PAYLOAD FROM THE TOKEN
   }
   loggedIn() {
     // CHECKS IF A USER IS CURRENTLY LOGGED IN
@@ -16,7 +16,7 @@ class AuthService {
   isTokenExpired(token) {
     // METHOD TO CHECK IF THE TOKEN IS EXPIRED
     try {
-      const decoded = jwtDecode(token); // DECODES THE TOKEN TO ACCESS THE EXPIRATION FIELD
+      const decoded = decode(token); // DECODES THE TOKEN TO ACCESS THE EXPIRATION FIELD
       if (decoded.exp < Date.now() / 1000) {
         // COMPARING THE EXPIRATION DATE TO THE CURRENT DATE
         return true; // RETURNING TRUE IF THE TOKEN IS EXPIRED
