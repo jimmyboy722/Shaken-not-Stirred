@@ -8,7 +8,7 @@ function HeaderAndNav() {
     <>
     <Link className="no-underline text-white" to="/drinks">
       <header className="text-white bg-purple-950 text-center text-5xl m-4 p-4 border-r-3 font-bold rounded-xl">
-        Shaken not Stirred
+        Shaken not Stirred  🍸
       </header>
     </Link>
       <nav className="text-white bg-purple-950 text-center m-4 p-4 border-r-3 font-bold rounded-xl">
