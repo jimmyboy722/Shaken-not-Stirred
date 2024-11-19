@@ -14,7 +14,7 @@ const { typeDefs, resolvers } = require("./schemas"); // GRAPHQL SCHEMAS
 const db = require("./config/connection"); // DB CONNECTION
 
 // SETTING UP THE SERVER PORT AND APOLLO SERVER INSTANCE
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
