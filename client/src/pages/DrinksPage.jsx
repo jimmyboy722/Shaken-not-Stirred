@@ -186,10 +186,10 @@ const AddDrink = () => {
           {error && <div className="error-text">{error.message}</div>}
         </form>
       ) : (
-        <p>
-          You need to be logged in to add a drink. Please{" "}
-          <Link to="/login">login</Link> or <Link to="/signup">signup</Link>.
-        </p>
+        <div className="text-white text-2xl bg-purple-950 m-4 p-4 border-2 rounded-xl text-bold text-center">
+          You need to be logged in to add a drink. Please 
+          <Link className="text-white text-2.5xl font-bold" to="/login"> login</Link> or <Link className="text-white text-2.5xl font-bold" to="/signup">signup</Link>.
+        </div>
       )}
 
       {/* Display user's drinks */}
@@ -197,7 +197,7 @@ const AddDrink = () => {
         <h3>Drinks</h3>
         {drinks.length > 0 ? (
           drinks.map((drink) => (
-            <div class="mb-2 mt-2 max-w-big p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="mb-2 mt-2 max-w-big p-6 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <div key={drink._id}>
                 <h4>{drink.drinkName}</h4>
                 <div style={{ display: "flex", justifyContent: "center" }}>
