@@ -37,14 +37,14 @@ const runApolloServer = async () => {
     })
   );
   // CHECKING IF NODE ENV IS PRODUCTION AND IF SO...
-  //if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
   //SERVE STATIC FILES FROM CLIENT/DIST DIRECTORY ALLOWING FOR REACT ROUTING
-  // app.use(express.static(path.join(__dirname, "../client/dist")));
+  app.use(express.static(path.join(__dirname, "../client/dist")));
   // FOR ALL OTHER ROUTES SEND INDEX.HTML IN THE CLIENT/DIST DIRECTORY
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  // });
-  //}
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  });
+  }
   // DB CONNECTION AND SERVER LISTENING
   db.once("open", () => {
     app.listen(PORT, () => {
