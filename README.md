@@ -18,13 +18,15 @@ Shaken not Stirred is the brain-child of James Eckman, Emily Ramirez and Efrain 
 ## Table of contents
 
 - [Installation](#Installation)
+- [Mockup](#Mockup)
 - [Technologies Used](#Technologies-Used)
 - [Contributing](#Contributing)
 - [License](#License)
 - [Documentation](#Documentation)
+- [Link](#Link)
 - [In Summary](#In-Summary)
 
-## Installation Instructions
+## Installation
 
 In order to install this app, follow these simple instructions:
 
@@ -32,6 +34,13 @@ In order to install this app, follow these simple instructions:
 2. Navigate to the client directory in your IDE.
 3. Enter the command `npm i`
 4. Enter the command `npm start` to run the program.
+
+---
+
+## Mockup
+
+The following is a mockup of what this application looks like:
+![img](Client/src/assets/images/Mockup.png)
 
 ---
 
@@ -68,6 +77,14 @@ The following resources will help you as they helped us understand and build a q
 - [W3School's MongoDB tutorial](https://www.w3schools.com/mongodb/) for examples as well as step-by-step instructions.
 - [NPM's website for node packages](https://www.npmjs.com/package/inquirer/v/8.2.4)
 - [Programming With Mosh's YouTube video titled "React Tutorial for Beginners](https://www.youtube.com/watch?app=desktop&v=SqcY0GlETPk)
+
+---
+
+## Link
+
+Here is a [link](https://shaken-not-stirred-c7oz.onrender.com) to the deployed application on Render.
+
+---
 
 ## In-Summary
 
